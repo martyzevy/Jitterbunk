@@ -1,0 +1,40 @@
+<h1>Bunks where {{ user.username }} got bunked:</h1>
+{% if user.bunks.exists %}
+    <ul>
+    {% for bunk in user.bunks.all %}
+        {% if bunk.toU == user %}
+            <li>
+                <h2>Bunk {{ bunk.id }}</h2>
+                <p><strong>Time of Bunk:</strong> {{ bunk.time }}</p>
+                <p><strong>Person doing the bunking:</strong> <a href="{% url 'jitter:individuals' bunk.fromU.id %}">{{ bunk.fromU.username }}</a></p>
+                <p><strong>Person getting bunked:</strong> <a href="{% url 'jitter:individuals' bunk.toU.id %}">{{ bunk.toU.username }}</a></p>
+            </li>
+        {% endif %}
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No Bunks are available.</p>
+{% endif %}
+
+<h1>Bunks where {{ user.username }} bunked someone else:</h1>
+{% with user_bunked_others=user.fromUser.all %}
+{% if user_bunked_others.exists %}
+    <ul>
+    {% for bunk in user_bunked_others %}
+        {% if bunk.fromU == user %}
+            <li>
+                <h2>Bunk {{ bunk.id }}</h2>
+                <p><strong>Time of Bunk:</strong> {{ bunk.time }}</p>
+                <p><strong>Person doing the bunking:</strong> <a href="{% url 'jitter:individuals' bunk.fromU.id %}">{{ bunk.fromU.username }}</a></p>
+                <p><strong>Person getting bunked:</strong> <a href="{% url 'jitter:individuals' bunk.toU.id %}">{{ bunk.toU.username }}</a></p>
+            </li>
+        {% endif %}
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No Bunks are available.</p>
+{% endif %}
+{% endwith %}
+<a href=../>See all Live Bunks</a>
+<p></p>
+<a href=/jitter/newbunkform/>Bunk Someone</a>

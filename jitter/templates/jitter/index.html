@@ -1,0 +1,15 @@
+<h1>Current Bunks:</h1>
+<a href=/jitter/newbunkform/>Bunk Someone</a>
+{% if list_of_bunks %}
+    <ul>
+    {% for bunk in list_of_bunks %}
+    <li><h2>Bunk {{bunk.id}}</h2><p></p><strong>Time of Bunk:</strong> {{bunk.time}}<p></p><strong>Person doing the bunking:</strong> <a href="{% url 'jitter:individuals' bunk.fromU.id %}">{{bunk.fromU.username }}</a><p></p>
+    <img src="{{bunk.fromU.photo}}" alt="From User" style="width:100px;">
+    <p></p><strong>Person getting bunked:</strong> <a href="{% url 'jitter:individuals' bunk.toU.id %}">{{bunk.toU.username }}</a></li>
+    <img src="{{bunk.toU.photo}}" alt="From User" style="width:100px;">
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No Bunks are available.</p>
+{% endif %}
+

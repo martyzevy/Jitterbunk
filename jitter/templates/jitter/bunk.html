@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bunk Someone</title>
+</head>
+<body>
+    <h1>Bunk Someone</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Bunk!</button>
+    </form>
+</body>
+</html>
+<p></p>
+<a href=../>See all Live Bunks</a>
